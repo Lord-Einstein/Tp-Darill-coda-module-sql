@@ -16,7 +16,7 @@ La modélisation repose sur quatre entités principales : **Quartier**, **Bar**,
 
 ---
 
-## 2. Entités principales
+## 2. Entités principales & explications (attributs importants, choix des types de mes champs...)
 
 ### ### **2.1 QUARTIER**
 
@@ -127,39 +127,3 @@ Une meme bière peut apparaître dans plusieurs bars mais son prix reste relatif
 5. **Les degrés d’alcool doivent être un nombre positif.**
 
 ---
-
-## 5. Voici mon schéma et la 'Synthaxe Mermaid pour le générer'
-
-```mermaid
-erDiagram
-
-    QUARTIER ||--o{ BAR : "contient"
-    BAR ||--o{ PRIX : "propose"
-    BIERE ||--o{ PRIX : "est vendue dans"
-
-    QUARTIER {
-        int id_quartier PK             "ID unique du quartier"
-        string nom            "Nom du quartier"
-    }
-
-    BAR {
-        int id_bar PK             "ID unique du bar"
-        string nom            "Nom du bar"
-        string adresse        "Adresse complète"
-        int id_quartier FK    "Quartier auquel appartient le bar"
-    }
-
-    BIERE {
-        int id_biere PK             "ID unique de la bière"
-        string nom            "Nom de la bière"
-        string type           "Style : IPA, Lager, Stout..."
-        float degres          "Degrés d'alcool"
-        string categorie      "Catégorie : artisanale, industrielle..."
-    }
-
-    PRIX {
-        int id_prix PK             "Identifiant du prix"
-        int id_bar FK         "Bar où est vendue la bière"
-        int id_biere FK       "Bière vendue"
-        numeric prix          "Prix de la bière dans le bar"
-    }
