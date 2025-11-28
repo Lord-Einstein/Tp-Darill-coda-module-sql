@@ -49,7 +49,7 @@ CREATE TABLE beerProject.prix (
     id_prix SERIAL PRIMARY KEY,
     id_bar INT NOT NULL,
     id_biere INT NOT NULL,
-    prix NUMERIC(5,2) NOT NULL CHECK (prix > 0)
+    prix NUMERIC(5,2) NOT NULL CHECK (prix > 0),
     
     FOREIGN KEY (id_bar) REFERENCES beerProject.bar(id_bar),
     FOREIGN KEY (id_biere) REFERENCES beerProject.biere(id_biere),

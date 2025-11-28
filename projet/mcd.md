@@ -65,7 +65,7 @@ Entité reliant **BAR** et **BIERE**.
 
 ## 3. Voici mon schéma et la 'Synthaxe Mermaid pour le générer'
 
-![IMAGE DU SCHEMA.](./mon_mcd.png)
+![IMAGE DU SCHEMA.](../img/mon_mcd.png)
 
 <br><br>
 

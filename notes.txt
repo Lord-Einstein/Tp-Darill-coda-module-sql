@@ -204,3 +204,9 @@ erDiagram
 
     
 
+
+
+
+docker-compose exec -T postgres psql -U codaSchoolUser -d codaSchool < scripts/schema.sql
+
+docker-compose exec postgres psql -U codaSchoolUser -d codaSchool -c "SELECT tablename FROM pg_tables WHERE schemaname = 'beerProject';"
