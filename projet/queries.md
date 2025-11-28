@@ -1,4 +1,4 @@
-> Premiere requête : Prix moyen de la bière par quatier
+> PREMIERE requête : Prix moyen de la bière par quatier
 
 ```sql
 
@@ -18,5 +18,25 @@ ORDER BY Prix_moyen ASC;
 ```
 
 
+
+> DEUXIEME requête : Bars vendant l'IPA la moins chère...
+
+```sql
+
+SELECT b.nom AS bar, p.prix
+--J'ai aussi sélectionné le prix juste pour qu'on puisse vérifier que c'est bien le prix le plus élevé qui est dans ma base
+FROM beerproject.bar b
+JOIN beerproject.prix p ON p.id_bar = b.id_bar
+JOIN beerproject.biere bi ON bi.id_biere = p.id_biere
+WHERE bi.nom LIKE 'IPA%' 
+AND p.prix = (
+    SELECT MIN(prix)
+    FROM beerproject.prix
+    JOIN beerproject.biere ON biere.id_biere = prix.id_biere
+    WHERE biere.nom LIKE 'IPA%'
+);
+
+
+```
 
 
