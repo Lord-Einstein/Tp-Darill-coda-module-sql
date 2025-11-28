@@ -105,3 +105,4 @@ erDiagram
         int id_biere FK       "Bière vendue"
         numeric prix          "Prix de la bière dans le bar"
     }
+```
