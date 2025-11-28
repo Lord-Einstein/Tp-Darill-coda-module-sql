@@ -2,14 +2,14 @@
 
 ```sql
 
-SELECT qu.nom AS Nom_quartier, ROUND(AVG(prix.prix), 2) AS Prix_moyen 
+SELECT qu.nom AS Nom_quartier, ROUND(AVG(p.prix), 2) AS Prix_moyen 
 --- J'ai du arrondir à deux décimales parce qu'il y'en avait trop.
 
 FROM beerproject.quartier qu
-JOIN beerproject.bar bar
-ON bar.id_quartier = qu.id_quartier
-JOIN beerproject.prix prix
-ON prix.id_bar = bar.id_bar
+JOIN beerproject.bar b
+ON b.id_quartier = qu.id_quartier
+JOIN beerproject.prix p
+ON p.id_bar = b.id_bar
 
 GROUP BY qu.nom
 ORDER BY Prix_moyen ASC;
@@ -45,7 +45,6 @@ AND p.prix = (
 ```sql
 
 SELECT bi.nom AS biere, COUNT(p.id_bar) AS Nombre_bars
-
 --Je n'ai pas mis de COUNT(DISTINCT p.id_bar) vu que dans mes règles métiers, un bar ne peut avoir qu'un prix par biere donc je n'ai pas de risques de doublons
 
 FROM beerproject.biere bi
@@ -68,12 +67,31 @@ ORDER BY Nombre_bars DESC;
 SELECT b.nom AS bar, MIN(p.prix) AS Prix_min
 
 FROM beerproject.bar b
-JOIN beerproject.prix p ON p.id_bar = b.id_bar
+JOIN beerproject.prix p 
+ON p.id_bar = b.id_bar
 GROUP BY b.nom
 
 HAVING MIN(p.prix) >= 6
 --Avec les datas de mon seed, tous les vars ont au leur prix minimum < 6, donc cette requête ne renvoie rien. Par contre j'ai résultats à partir de 5...
 ORDER BY Prix_min ASC;
+
+```
+
+
+> CINQUIEME requête :  Bar avec le panier moyen maximum
+
+```sql
+
+SELECT b.nom AS bar, ROUND(AVG(p.prix), 2) AS Panier_moyen
+
+FROM beerproject.bar b
+JOIN beerproject.prix p 
+ON p.id_bar = b.id_bar
+GROUP BY b.nom
+
+ORDER BY Panier_moyen DESC
+--DESC pour avoir le plus élevé en triant sur Pnier_moyen et ensuite LIMIT 1 pour voir juste le premier...
+LIMIT 1;
 
 ```
 
