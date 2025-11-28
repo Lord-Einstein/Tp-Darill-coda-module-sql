@@ -61,5 +61,24 @@ ORDER BY Nombre_bars DESC;
 ```
 
 
+> QUATRIEME requête :  bars sans bière à moins de 6€
+
+```sql
+
+SELECT b.nom AS bar, MIN(p.prix) AS Prix_min
+
+FROM beerproject.bar b
+JOIN beerproject.prix p ON p.id_bar = b.id_bar
+GROUP BY b.nom
+
+HAVING MIN(p.prix) >= 6
+--Avec les datas de mon seed, tous les vars ont au leur prix minimum < 6, donc cette requête ne renvoie rien. Par contre j'ai résultats à partir de 5...
+ORDER BY Prix_min ASC;
+
+```
+
+
+
+
 
 
