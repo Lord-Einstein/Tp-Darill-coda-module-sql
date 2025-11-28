@@ -40,3 +40,26 @@ AND p.prix = (
 ```
 
 
+> TROISIEME requête :  bières vendues dans ≥ 5 bars...
+
+```sql
+
+SELECT bi.nom AS biere, COUNT(p.id_bar) AS Nombre_bars
+
+--Je n'ai pas mis de COUNT(DISTINCT p.id_bar) vu que dans mes règles métiers, un bar ne peut avoir qu'un prix par biere donc je n'ai pas de risques de doublons
+
+FROM beerproject.biere bi
+JOIN beerproject.prix p 
+ON p.id_biere = bi.id_biere
+GROUP BY bi.nom
+
+HAVING COUNT(p.id_bar) >= 5
+ORDER BY Nombre_bars DESC;
+
+--le ORDER BY, juste pour voir la bière la plus vendue en premier
+
+```
+
+
+
+
